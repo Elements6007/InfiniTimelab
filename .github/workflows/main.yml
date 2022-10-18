@@ -27,6 +27,11 @@ jobs:
 
       - name: Install cmake
         uses: lukka/get-cmake@v3.18.3
+        
+      
+      - name: Install lv_font_conv
+        run:
+         npm i -g lv_font_conv@1.5.2
 
       - name: Check cache for Embedded Arm Toolchain arm-none-eabi-gcc
         id:   cache-toolchain
