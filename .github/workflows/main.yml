@@ -129,7 +129,7 @@ jobs:
       - name: Upload DFU package
         uses: actions/upload-artifact@v2
         with:
-          name: pinetime-mcuboot-app-dfu
+          name: pinetime-mcuboot-app-dfuold
           path: build/src/pinetime-mcuboot-app-dfu/*
 
         #########################################################################################
