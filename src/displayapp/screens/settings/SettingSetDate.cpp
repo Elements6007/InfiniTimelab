@@ -56,7 +56,7 @@ SettingSetDate::SettingSetDate(Pinetime::Applications::DisplayApp* app, Pinetime
                 return CreateScreen2();
               }},
              Screens::ScreenListModes::UpDown} {
-}  {
+}  
 
 std::unique_ptr<Screen> SettingSetDate::CreateScreen1() {
 
