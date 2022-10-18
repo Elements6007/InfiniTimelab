@@ -5,6 +5,8 @@
 #include "components/datetime/DateTimeController.h"
 #include "displayapp/screens/Screen.h"
 #include "displayapp/widgets/Counter.h"
+#include "displayapp/screens/Label.h"
+#include "displayapp/screens/ScreenList.h"
 
 namespace Pinetime {
   namespace Applications {
@@ -26,6 +28,11 @@ namespace Pinetime {
         Widgets::Counter dayCounter = Widgets::Counter(1, 31, jetbrains_mono_bold_20);
         Widgets::Counter monthCounter = Widgets::Counter(1, 12, jetbrains_mono_bold_20);
         Widgets::Counter yearCounter = Widgets::Counter(1970, 9999, jetbrains_mono_bold_20);
+
+        ScreenList<2> screens;
+
+        std::unique_ptr<Screen> CreateScreen1();
+        std::unique_ptr<Screen> CreateScreen2();
       };
     }
   }

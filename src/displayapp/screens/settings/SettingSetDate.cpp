@@ -4,6 +4,8 @@
 #include <nrf_log.h>
 #include "displayapp/DisplayApp.h"
 #include "displayapp/screens/Symbols.h"
+#include "displayapp/screens/ScreenList.h"
+#include "displayapp/screens/Label.h"
 
 using namespace Pinetime::Applications::Screens;
 
@@ -45,7 +47,19 @@ namespace {
 }
 
 SettingSetDate::SettingSetDate(Pinetime::Applications::DisplayApp* app, Pinetime::Controllers::DateTime& dateTimeController)
-  : Screen(app), dateTimeController {dateTimeController} {
+  : Screen(app), dateTimeController {dateTimeController}, screens {app,
+             0,
+             {[this]() -> std::unique_ptr<Screen> {
+                return CreateScreen1();
+              },
+              [this]() -> std::unique_ptr<Screen> {
+                return CreateScreen2();
+              }},
+             Screens::ScreenListModes::UpDown} {
+}  {
+
+std::unique_ptr<Screen> SettingSetDate::CreateScreen1() {
+
   lv_obj_t* title = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(title, "Set current date");
   lv_label_set_align(title, LV_LABEL_ALIGN_CENTER);
@@ -84,6 +98,9 @@ SettingSetDate::SettingSetDate(Pinetime::Applications::DisplayApp* app, Pinetime
   lv_obj_set_event_cb(btnSetTime, event_handler);
   lv_btn_set_state(btnSetTime, LV_BTN_STATE_DISABLED);
   lv_obj_set_state(lblSetTime, LV_STATE_DISABLED);
+
+  return std::make_unique<Screens::Label>(0, 2, app, title);
+
 }
 
 SettingSetDate::~SettingSetDate() {
@@ -112,4 +129,15 @@ void SettingSetDate::CheckDay() {
   dayCounter.SetMax(maxDay);
   lv_btn_set_state(btnSetTime, LV_BTN_STATE_RELEASED);
   lv_obj_set_state(lblSetTime, LV_STATE_DEFAULT);
+}
+
+std::unique_ptr<Screen> SettingSetDate::CreateScreen2() {
+ 
+  lv_obj_t * onion = lv_label_create(lv_scr_act(), nullptr);
+  lv_label_set_text(onion, Symbols::phone);
+  lv_obj_align(onion, lv_scr_act(), LV_ALIGN_IN_TOP_RIGHT, 0, 0);
+
+
+  return std::make_unique<Screens::Label>(1, 2, app, onion);
+
 }
