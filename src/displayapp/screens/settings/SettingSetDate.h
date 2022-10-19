@@ -15,14 +15,12 @@ namespace Pinetime {
       public:
         SettingSetDate(DisplayApp* app, Pinetime::Controllers::DateTime& dateTimeController);
         ~SettingSetDate() override;
-        
-        void HandleButtonPress();
-        void CheckDay();
-        
-        void HandleButtonPress(lv_obj_t *object, lv_event_t event);
 
         bool OnTouchEvent(TouchEvents event) override;
         
+        void HandleButtonPress();
+        void CheckDay();
+
       private:
         Controllers::DateTime& dateTimeController;
 
