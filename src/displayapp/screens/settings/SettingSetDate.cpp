@@ -46,6 +46,10 @@ namespace {
   }
 }
 
+bool SettingSetDate::OnTouchEvent(Pinetime::Applications::TouchEvents event) {
+  return screens.OnTouchEvent(event);
+}
+
 SettingSetDate::SettingSetDate(Pinetime::Applications::DisplayApp* app, Pinetime::Controllers::DateTime& dateTimeController)
   : Screen(app), dateTimeController {dateTimeController}, screens {app,
              0,
@@ -103,8 +107,13 @@ std::unique_ptr<Screen> SettingSetDate::CreateScreen1() {
 
 }
 
-SettingSetDate::~SettingSetDate() {
-  lv_obj_clean(lv_scr_act());
+std::unique_ptr<Screen> SettingSetDate::CreateScreen2() {
+ 
+  lv_obj_t * onion = lv_label_create(lv_scr_act(), nullptr);
+  lv_label_set_text(onion, Symbols::phone);
+  lv_obj_align(onion, lv_scr_act(), LV_ALIGN_IN_TOP_RIGHT, 0, 0);
+
+  return std::make_unique<Screens::Label>(1, 2, app, onion);
 }
 
 void SettingSetDate::HandleButtonPress() {
@@ -124,6 +133,10 @@ void SettingSetDate::HandleButtonPress() {
   lv_obj_set_state(lblSetTime, LV_STATE_DISABLED);
 }
 
+SettingSetDate::~SettingSetDate() {
+  lv_obj_clean(lv_scr_act());
+}
+
 void SettingSetDate::CheckDay() {
   const int maxDay = MaximumDayOfMonth(monthCounter.GetValue(), yearCounter.GetValue());
   dayCounter.SetMax(maxDay);
@@ -131,13 +144,4 @@ void SettingSetDate::CheckDay() {
   lv_obj_set_state(lblSetTime, LV_STATE_DEFAULT);
 }
 
-std::unique_ptr<Screen> SettingSetDate::CreateScreen2() {
- 
-  lv_obj_t * onion = lv_label_create(lv_scr_act(), nullptr);
-  lv_label_set_text(onion, Symbols::phone);
-  lv_obj_align(onion, lv_scr_act(), LV_ALIGN_IN_TOP_RIGHT, 0, 0);
 
-
-  return std::make_unique<Screens::Label>(1, 2, app, onion);
-
-}
