@@ -28,6 +28,7 @@ namespace {
   void ValueChangedHandler(void* userData) {
     auto* screen = static_cast<SettingSetDate*>(userData);
     screen->CheckDay();
+    screen->UpdateScreen();
   }
 
   int MaximumDayOfMonth(uint8_t month, uint16_t year) {
@@ -55,10 +56,6 @@ namespace {
     if (event == LV_EVENT_CLICKED) {
       screen->SetTime();
     }
-  }
-  void ValueChangedHandler(void* userData) {
-    auto* screen = static_cast<SettingSetDate*>(userData);
-    screen->UpdateScreen();
   }
 }
 
