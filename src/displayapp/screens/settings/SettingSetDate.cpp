@@ -28,6 +28,7 @@ namespace {
   void ValueChangedHandler(void* userData) {
     auto* screen = static_cast<SettingSetDate*>(userData);
     screen->CheckDay();
+    //SettingSetTime
     screen->UpdateScreen();
   }
 
@@ -49,7 +50,7 @@ namespace {
     }
   }
   //SettingSetDate
-  constexpr int16_t POS_Y_TEXT = -7;
+  constexpr int16_t POS_Y_TEXTD = -7;
 
   void SetTimeEventHandler(lv_obj_t* obj, lv_event_t event) {
     auto* screen = static_cast<SettingSetDate*>(obj->user_data);
@@ -138,19 +139,19 @@ std::unique_ptr<Screen> SettingSetDate::CreateScreen2() {
   lv_obj_t* staticLabel = lv_label_create(lv_scr_act(), nullptr);
   lv_obj_set_style_local_text_font(staticLabel, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &jetbrains_mono_42);
   lv_label_set_text_static(staticLabel, "00:00:00");
-  lv_obj_align(staticLabel, lv_scr_act(), LV_ALIGN_CENTER, 0, POS_Y_TEXT);
+  lv_obj_align(staticLabel, lv_scr_act(), LV_ALIGN_CENTER, 0, POS_Y_TEXTD);
 
   hourCounter.Create();
   if (settingsController.GetClockType() == Controllers::Settings::ClockType::H12) {
     hourCounter.EnableTwelveHourMode();
   }
   hourCounter.SetValue(dateTimeController.Hours());
-  lv_obj_align(hourCounter.GetObject(), nullptr, LV_ALIGN_CENTER, -75, POS_Y_TEXT);
+  lv_obj_align(hourCounter.GetObject(), nullptr, LV_ALIGN_CENTER, -75, POS_Y_TEXTD);
   hourCounter.SetValueChangedEventCallback(this, ValueChangedHandler);
 
   minuteCounter.Create();
   minuteCounter.SetValue(dateTimeController.Minutes());
-  lv_obj_align(minuteCounter.GetObject(), nullptr, LV_ALIGN_CENTER, 0, POS_Y_TEXT);
+  lv_obj_align(minuteCounter.GetObject(), nullptr, LV_ALIGN_CENTER, 0, POS_Y_TEXTD);
   minuteCounter.SetValueChangedEventCallback(this, ValueChangedHandler);
 
   lblampm = lv_label_create(lv_scr_act(), nullptr);
