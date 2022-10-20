@@ -30,8 +30,8 @@ namespace Pinetime {
         Controllers::DateTime& dateTimeController;
         Controllers::Settings& settingsController;
         //SettingSetDate labels
-        lv_obj_t* btnSetTime;
-        lv_obj_t* lblSetTime;
+        lv_obj_t* btnSetDate;
+        lv_obj_t* lblSetDate;
         //SettingSetTime labels 
         lv_obj_t* lblampm;
         lv_obj_t* btnSetTime;

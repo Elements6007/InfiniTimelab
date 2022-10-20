@@ -112,14 +112,14 @@ std::unique_ptr<Screen> SettingSetDate::CreateScreen1() {
 
   btnSetTime = lv_btn_create(lv_scr_act(), nullptr);
   btnSetTime->user_data = this;
-  lv_obj_set_size(btnSetTime, 120, 48);
-  lv_obj_align(btnSetTime, lv_scr_act(), LV_ALIGN_IN_BOTTOM_MID, 0, 0);
+  lv_obj_set_size(btnSetDate, 120, 48);
+  lv_obj_align(btnSetDate, lv_scr_act(), LV_ALIGN_IN_BOTTOM_MID, 0, 0);
   lv_obj_set_style_local_bg_color(btnSetTime, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x38, 0x38, 0x38));
   lblSetTime = lv_label_create(btnSetTime, nullptr);
-  lv_label_set_text_static(lblSetTime, "Set");
-  lv_obj_set_event_cb(btnSetTime, event_handler);
-  lv_btn_set_state(btnSetTime, LV_BTN_STATE_DISABLED);
-  lv_obj_set_state(lblSetTime, LV_STATE_DISABLED);
+  lv_label_set_text_static(lblSetDate, "Set");
+  lv_obj_set_event_cb(btnSetDate, event_handler);
+  lv_btn_set_state(btnSetDate, LV_BTN_STATE_DISABLED);
+  lv_obj_set_state(lblSetDate, LV_STATE_DISABLED);
 
   return std::make_unique<Screens::Label>(0, 2, app, title);
 
@@ -191,8 +191,8 @@ void SettingSetDate::HandleButtonPress() {
                              dateTimeController.Minutes(),
                              dateTimeController.Seconds(),
                              nrf_rtc_counter_get(portNRF_RTC_REG));
-  lv_btn_set_state(btnSetTime, LV_BTN_STATE_DISABLED);
-  lv_obj_set_state(lblSetTime, LV_STATE_DISABLED);
+  lv_btn_set_state(btnSetDate, LV_BTN_STATE_DISABLED);
+  lv_obj_set_state(lblSetDate, LV_STATE_DISABLED);
 }
 
 SettingSetDate::~SettingSetDate() {
@@ -202,8 +202,8 @@ SettingSetDate::~SettingSetDate() {
 void SettingSetDate::CheckDay() {
   const int maxDay = MaximumDayOfMonth(monthCounter.GetValue(), yearCounter.GetValue());
   dayCounter.SetMax(maxDay);
-  lv_btn_set_state(btnSetTime, LV_BTN_STATE_RELEASED);
-  lv_obj_set_state(lblSetTime, LV_STATE_DEFAULT);
+  lv_btn_set_state(btnSetDate, LV_BTN_STATE_RELEASED);
+  lv_obj_set_state(lblSetDate, LV_STATE_DEFAULT);
 }
 //SettingSetTime
 void SettingSetDate::UpdateScreen() {
