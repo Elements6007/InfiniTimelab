@@ -51,13 +51,13 @@ namespace {
   constexpr int16_t POS_Y_TEXT = -7;
 
   void SetTimeEventHandler(lv_obj_t* obj, lv_event_t event) {
-    auto* screen = static_cast<SettingSetTime*>(obj->user_data);
+    auto* screen = static_cast<SettingSetDate*>(obj->user_data);
     if (event == LV_EVENT_CLICKED) {
       screen->SetTime();
     }
   }
   void ValueChangedHandler(void* userData) {
-    auto* screen = static_cast<SettingSetTime*>(userData);
+    auto* screen = static_cast<SettingSetDate*>(userData);
     screen->UpdateScreen();
   }
 }
