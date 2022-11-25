@@ -34,7 +34,7 @@ namespace {
 
   void DateValueChangedHandler(void* userData) {
     auto* screen = static_cast<SettingSetDateTime*>(userData);
-    screen->UpdateDay();
+    screen->UpdateDate();
   }
 
   
@@ -216,7 +216,7 @@ void SettingSetDateTime::SetTime() {
   lv_obj_set_state(lblSetTime, LV_STATE_DISABLED);
 }
 
-void SettingSetDateTime::UpdateDay() {
+void SettingSetDateTime::UpdateDate() {
   const int maxDay = MaximumDayOfMonth(monthCounter.GetValue(), yearCounter.GetValue());
   dayCounter.SetMax(maxDay);
   lv_btn_set_state(btnSetDate, LV_BTN_STATE_RELEASED);
