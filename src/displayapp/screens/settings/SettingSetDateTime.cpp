@@ -37,7 +37,6 @@ namespace {
     screen->UpdateDate();
   }
 
-  
   void TimeValueChangedHandler(void* userData) {
     auto* screen = static_cast<SettingSetDateTime*>(userData);
     screen->UpdateTime();
